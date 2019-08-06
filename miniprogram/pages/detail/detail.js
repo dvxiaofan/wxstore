@@ -2,8 +2,14 @@
  * @Author: zhang 
  * @Date: 2019-08-06 13:20:51 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-06 14:24:11
+ * @Last Modified time: 2019-08-06 15:32:40
  */
+
+
+
+const db = wx.cloud.database({
+  env: 'wxstore-devzhang'
+})
 
 Page({
 
@@ -11,32 +17,71 @@ Page({
    * 页面的初始数据
    */
   data: {
-    product: {
-      id: 2,
-      image: 'http://placekitten.com/300/300',
-      name: 'Guitar',
-      price: 399.80,
-      source: 'SWEDEN'
-    }
+    // product: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.cloud.callFunction({
-      name: 'add',
-      data: {
-        a: 2,
-        b: 7
-      },
-      success: function(res) {
-        console.log(res.result)
-      },
-      fail: function(error) {
-        console.log(error)
+    wx.showLoading({
+      title: 'Loading...'
+    });
+
+    // 查询云数据库内容
+    db.collection('product').doc(options.id).get().then((result) => {
+      wx.hideLoading();
+      
+      const product = result.data;
+
+      if (product) {
+        this.setData({
+          product
+        })
+      }else {
+        setTimeout(() => {
+          wx.navigateBack();
+        }, 2000);
       }
-    })
+    }).catch((err) => {
+      wx.hideLoading();
+      console.error(err);
+
+      setTimeout(() => {
+        wx.navigateBack();
+      }, 2000);
+    });
+
+    // wx.cloud.callFunction({
+    //   name: 'productDetail',
+    //   data: {
+    //     id: options.id
+    //   }
+    // }).then((result) => {
+    //   wx.hideLoading();
+      
+    //   const data = result.result;
+      
+    //   console.log(data)
+
+    //   if (data) {
+    //     this.setData({
+    //       product: data
+    //     })
+    //   } else {
+    //     setTimeout(() => {
+    //       wx.navigateBack();
+    //     }, 2000);
+    //   }
+    // }).catch((err) => {
+    //   console.error(err);
+    //   wx.hideLoading();
+      
+    //   setTimeout(() => {
+    //     wx.navigateBack();
+    //   }, 2000);
+    // });
+      
   },
 
   /**
