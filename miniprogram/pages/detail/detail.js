@@ -1,8 +1,8 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-06 13:20:51 
- * @Last Modified by:   zhang 
- * @Last Modified time: 2019-08-06 13:20:51 
+ * @Last Modified by: zhang
+ * @Last Modified time: 2019-08-06 14:24:11
  */
 
 Page({
@@ -24,7 +24,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.cloud.callFunction({
+      name: 'add',
+      data: {
+        a: 2,
+        b: 7
+      },
+      success: function(res) {
+        console.log(res.result)
+      },
+      fail: function(error) {
+        console.log(error)
+      }
+    })
   },
 
   /**
