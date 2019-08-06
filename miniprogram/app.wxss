@@ -1,0 +1,22 @@
+/*
+ * @Author: zhang 
+ * @Date: 2019-08-06 10:34:59 
+ * @Last Modified by: zhang
+ * @Last Modified time: 2019-08-06 10:36:13
+ */
+
+
+
+page {
+  padding-bottom: 30rpx;
+  background: #f9f9f9;
+}
+
+.bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 144rpx;
+  z-index: -1;
+}
