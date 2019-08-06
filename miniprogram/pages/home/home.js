@@ -1,8 +1,7 @@
 // miniprogram/pages/home/home.js
 
-const db = wx.cloud.database({
-  env: 'wxstore-devzhang'
-})
+const db = require('../../utils/db');
+const util = require('../../utils/util');
 
 
 Page({
@@ -10,9 +9,7 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    productList: []
-  },
+  data: {},
 
   /**
    * 生命周期函数--监听页面加载
@@ -27,13 +24,13 @@ Page({
     });
 
     // 查询云数据库内容
-    db.collection('product').get().then((result) => {
+    db.getProductList().then((result) => {
       wx.hideLoading();
       
       const productList = result.data;
 
       productList.forEach(product => {
-        product.price = parseFloat(Math.round(product.price * 100) / 100).toFixed(2);
+        product.price = util.priceFormate(product.price);
       });
 
       if (productList.length) {
