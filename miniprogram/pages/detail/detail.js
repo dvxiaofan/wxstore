@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 13:20:51 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-06 15:48:54
+ * @Last Modified time: 2019-08-07 10:06:52
  */
 
 
@@ -33,7 +33,7 @@ Page({
     db.getProductDetail(id).then((result) => {
       wx.hideLoading();
       
-      const product = result.data;
+      const product = result.result;
 
       if (product) {
         product.price = util.priceFormate(product.price);
