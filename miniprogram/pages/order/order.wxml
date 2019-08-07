@@ -1,2 +1,12 @@
 <!--pages/order/order.wxml-->
-<text>pages/order/order.wxml</text>
+
+<image class="bg" src="/images/bg.png" />
+
+<view wx:if="{{!userInfo}}">
+    <login bind:onLogin="onTapLogin"></login>
+</view>
+
+<view class="order-card" wx:else>
+    order-card
+</view>
+
