@@ -1,2 +1,34 @@
 <!--pages/me/me.wxml-->
-<text>pages/me/me.wxml</text>
+
+<image class="bg" src="/images/bg.png" />
+
+<view wx:if="{{!userInfo}}">
+    <view class="login-card">
+        <view class="login-head"></view>
+        <view class="login-info">
+            <view class="login-text">Not Login</view>
+            <view class="login-tips">Click "Login" with WeChat account to shop</view>
+        </view>
+    </view>
+
+    <button class="login-btn" open-type="getUserInfo" bindgetuserinfo="onTapLogin">Login</button>
+
+</view>
+
+<view class="user-card" wx:else>
+    <view class="user-info">
+        <image class="user-head" src="{{userInfo.avatarUrl}}" />
+        <view class="user-name">{{userInfo.nickName}}</view>
+    </view>
+    <view class="user-split"></view>
+    <view class="user-options">
+        <view class="option" bind:tap="onTapAddress">
+            <view class="option-title">Your Address</view>
+            <image class="option-arrow" src="/images/grey-arrow.png" />
+        </view>
+        <view class="option" bind:tap="onTapService">
+            <view class="option-title">Contact Customer Service</view>
+            <image class="option-arrow" src="/images/grey-arrow.png" />
+        </view>
+    </view>
+</view>

@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 13:20:51 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-07 10:06:52
+ * @Last Modified time: 2019-08-07 12:31:05
  */
 
 
@@ -24,6 +24,7 @@ Page({
     this.getProductDetail(options.id);
   },
 
+  // 获取商品详情
   getProductDetail(id) {
     wx.showLoading({
       title: 'Loading...'

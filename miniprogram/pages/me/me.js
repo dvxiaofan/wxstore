@@ -1,11 +1,45 @@
-// pages/me/me.js
+/*
+ * @Author: zhang 
+ * @Date: 2019-08-07 13:16:28 
+ * @Last Modified by: zhang
+ * @Last Modified time: 2019-08-07 13:23:42
+ */
+
+
+const util = require('../../utils/util');
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    userInfo: null
+  },
 
+  // 登录
+  onTapLogin(event) {
+    if (event.detail.userInfo) {
+      this.setData({
+        userInfo: event.detail.userInfo
+      })
+    }
+  },
+
+  // 增加地址
+  onTapAddress() {
+    wx.showToast({
+      title: 'This function is not open yet',
+      icon: 'none'
+    })
+  },
+
+  onTapService() {
+    wx.showToast({
+      title: 'This function is not open yet',
+      icon: 'none'
+    })
   },
 
   /**
@@ -26,7 +60,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    util.getUserInfo().then( userInfo => {
+      this.setData({
+        userInfo
+      })
+    })
   },
 
   /**
