@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:52:05 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-08 12:20:51
+ * @Last Modified time: 2019-08-08 12:56:52
  */
 
 
@@ -15,7 +15,41 @@ Page({
    */
   data: {
     userInfo: null,
-    orderList: []
+    orderList: [{
+        id: 0,
+        productList: [{
+          count: 1,
+          image: 'http://placekitten.com/200/200',
+          name: 'product one',
+          price: '25.99'
+        }]
+      },
+      {
+        id: 1,
+        productList: [{
+            count: 1,
+            image: 'http://placekitten.com/300/300',
+            name: 'product two',
+            price: '52.8'
+          },
+          {
+            count: 1,
+            image: 'http://placekitten.com/220/220',
+            name: 'product 3',
+            price: '39.45'
+          }
+        ]
+      },
+      {
+        id: 2,
+        productList: [{
+          count: 2,
+          image: 'http://placekitten.com/280/280',
+          name: 'product 4',
+          price: '69.1'
+        }]
+      }
+    ]
   },
 
   /**
@@ -40,6 +74,16 @@ Page({
       this.setData({
         userInfo
       })
+    })
+
+    this.data.orderList.forEach(order => {
+      order.productList.forEach(product => {
+        product.price = util.priceFormate(product.price);
+      })
+    })
+
+    this.setData({
+      orderList: this.data.orderList
     })
   },
 
