@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:52:05 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-07 13:53:13
+ * @Last Modified time: 2019-08-08 12:20:51
  */
 
 
@@ -14,7 +14,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null
+    userInfo: null,
+    orderList: []
   },
 
   /**

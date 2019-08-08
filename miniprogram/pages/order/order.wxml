@@ -6,7 +6,8 @@
     <login bind:onLogin="onTapLogin"></login>
 </view>
 
-<view class="order-card" wx:else>
-    order-card
+<view class="order-empty" wx:elif="{{orderList.length === 0}}">
+    <image class="empty-image" src="/images/order.png" />
+    <view class="empty-text">You don't have any order yet.</view>
 </view>
 
