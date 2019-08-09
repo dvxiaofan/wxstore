@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:52:05 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-08 12:56:52
+ * @Last Modified time: 2019-08-09 10:39:07
  */
 
 
@@ -74,6 +74,8 @@ Page({
       this.setData({
         userInfo
       })
+    }).catch(err => {
+      console.log('Not Authenticated yet')
     })
 
     this.data.orderList.forEach(order => {

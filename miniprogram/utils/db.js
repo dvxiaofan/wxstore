@@ -2,9 +2,10 @@
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:04 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 10:10:33
+ * @Last Modified time: 2019-08-09 10:28:31
  */
 
+const util = require('./util')
 
 const db = wx.cloud.database({
     env: 'wxstore-devzhang'
@@ -20,23 +21,45 @@ module.exports = {
     getProductDetail(id) {
         return wx.cloud.callFunction({
             name: 'productDetail',
-            data: { id }
+            data: {
+                id
+            }
         })
     },
 
     // 立即购买商品
     addToOrder(data) {
-        return wx.cloud.callFunction({
-            name: 'addToOrder',
-            data,
+        return util.isAuthenticated()
+        .then(() => {
+            return wx.cloud.callFunction({
+                name: 'addToOrder',
+                data,
+            });
+        })
+        .catch(() => {
+            wx.showToast({
+                title: 'Please Login First',
+                icon: 'none'
+            })
+            return {};
         })
     },
 
-    // 添加购物车
+    // 添加购物车 
     addToCart(data) {
-        return wx.cloud.callFunction({
-            name: 'addToCart',
-            data,
+        return util.isAuthenticated()
+        .then(() => {
+            return wx.cloud.callFunction({
+                name: 'addToCart',
+                data,
+            });
+        })
+        .catch(() => {
+            wx.showToast({
+                title: 'Please Login First',
+                icon: 'none'
+            })
+            return {};
         })
     }
 }

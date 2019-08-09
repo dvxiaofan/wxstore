@@ -1,8 +1,8 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-07 13:55:55 
- * @Last Modified by:   zhang 
- * @Last Modified time: 2019-08-07 13:55:55 
+ * @Last Modified by: zhang
+ * @Last Modified time: 2019-08-09 10:39:55
  */
 
 
@@ -39,6 +39,8 @@ Page({
       this.setData({
         userInfo
       })
+    }).catch(err => {
+      console.log('Not Authenticated yet')
     })
   },
 
