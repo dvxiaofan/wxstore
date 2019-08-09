@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 13:20:51 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-07 12:31:05
+ * @Last Modified time: 2019-08-09 09:51:26
  */
 
 
@@ -54,6 +54,42 @@ Page({
       setTimeout(() => {
         wx.navigateBack();
       }, 2000);
+    });
+  },
+
+  // 购买商品
+  buy() {
+    wx.showLoading({
+      title: 'Purchasing...'
+    });
+      
+    const productToBuy = Object.assign({
+      count: 1
+    }, this.data.product);
+
+    productToBuy.productId = productToBuy._id;
+
+    db.addToOrder({
+      list: [productToBuy]
+    }).then((result) => {
+      wx.hideLoading();
+
+      const data = result.result;
+
+      if (data) {
+        wx.showToast({
+          title: 'Succeed',
+          icon: 'none'
+        })
+      }
+    }).catch((err) => {
+      console.error(err);
+      wx.hideLoading();
+
+      wx.showToast({
+        title: 'Failed',
+        icon: 'none'
+      })      
     });
   },
 
