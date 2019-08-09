@@ -2,10 +2,10 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:55:55 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 13:28:50
+ * @Last Modified time: 2019-08-09 15:20:40
  */
 
-
+const db = require('../../utils/db');
 const util = require('../../utils/util');
 
 Page({
@@ -15,53 +15,55 @@ Page({
    */
   data: {
     userInfo: null,
-    cartList: [{
-      id: 1,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product1.jpg',
-      name: 'Wallet',
-      price: '100.00',
-      source: 'CHINA',
-      count: 1,
-    }, {
-      id: 2,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product2.jpg',
-      name: 'Guitar',
-      price: '200.00',
-      source: 'SWEDEN',
-      count: 3,
-    }, {
-      id: 3,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product3.jpg',
-      name: 'Stapler',
-      price: '300.00',
-      source: 'GERMANY',
-      count: 4,
-    }, {
-      id: 4,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product4.jpg',
-      name: 'Leafy vegetables',
-      price: '400.00',
-      source: 'NEW ZEALAND',
-      count: 2,
-    }, {
-      id: 5,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product5.jpg',
-      name: 'Compass',
-      price: '500.00',
-      source: 'USA',
-      count: 1,
-    }],
+    cartList: [],
     isSelectAllChecked: false,
     isCartEdit: false,
     cartCheckMap: {},
-    cartTotal: '45.99'
+    cartTotal: '0'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 获取购物车内商品列表
+    this.getCartList();
+  },
 
+  getCartList() {
+    wx.showLoading({
+      title: 'Loading...'
+    });
+
+    const cartCheckMap = this.data.cartCheckMap;
+
+    db.getCartList().then((result) => {
+      wx.hideLoading();
+
+      const data = result.result;
+
+      if (data.length) {
+        // 更新购物车价格
+        let checkout = 0;
+        data.forEach(product => {
+          checkout += product.price * product.count;
+        })
+
+        this.setData({
+          cartTotal: checkout,
+          cartList: data
+        })
+      }
+    }).catch((err) => {
+      console.error(err);
+
+      wx.hideLoading();
+      
+      wx.showToast({
+        title: 'Failed',
+        icon: 'none'
+      })
+    });
   },
 
   /**
@@ -79,6 +81,8 @@ Page({
       this.setData({
         userInfo
       })
+
+      this.getCartList();
     }).catch(err => {
       console.log('Not Authenticated yet')
     })
@@ -90,6 +94,8 @@ Page({
       this.setData({
         userInfo: event.detail.userInfo
       })
+
+      this.getCartList();
     }
   },
 

@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:04 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 11:03:23
+ * @Last Modified time: 2019-08-09 14:59:56
  */
 
 const util = require('./util')
@@ -78,5 +78,22 @@ module.exports = {
             })
             return {};
         })
-    }
+    },
+
+    // 获取购物车列表
+    getCartList() {
+        return util.isAuthenticated()
+        .then(() => {
+            return wx.cloud.callFunction({
+                name: 'getCartList'
+            })
+        })
+        .catch(() => {
+            wx.showToast({
+                title: 'Please Login First',
+                icon: 'none'
+            })
+            return {}
+        })
+    },
 }

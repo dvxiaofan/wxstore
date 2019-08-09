@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 13:20:51 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 13:49:25
+ * @Last Modified time: 2019-08-09 14:59:04
  */
 
 
@@ -62,12 +62,6 @@ Page({
     wx.showLoading({
       title: 'Add to cart...'
     });
-      
-    // const productToAdd = Object.assign({
-    //   count: 1
-    // }, this.data.product);
-
-    // productToAdd.productId = productToAdd._id;
 
     db.addToCart(this.data.product).then((result) => {
       wx.hideLoading();
