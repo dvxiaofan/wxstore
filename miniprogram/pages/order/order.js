@@ -2,10 +2,10 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:52:05 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 10:39:07
+ * @Last Modified time: 2019-08-09 10:57:40
  */
 
-
+const db = require('../../utils/db');
 const util = require('../../utils/util');
 
 Page({
@@ -15,41 +15,7 @@ Page({
    */
   data: {
     userInfo: null,
-    orderList: [{
-        id: 0,
-        productList: [{
-          count: 1,
-          image: 'http://placekitten.com/200/200',
-          name: 'product one',
-          price: '25.99'
-        }]
-      },
-      {
-        id: 1,
-        productList: [{
-            count: 1,
-            image: 'http://placekitten.com/300/300',
-            name: 'product two',
-            price: '52.8'
-          },
-          {
-            count: 1,
-            image: 'http://placekitten.com/220/220',
-            name: 'product 3',
-            price: '39.45'
-          }
-        ]
-      },
-      {
-        id: 2,
-        productList: [{
-          count: 2,
-          image: 'http://placekitten.com/280/280',
-          name: 'product 4',
-          price: '69.1'
-        }]
-      }
-    ]
+    orderList: []
   },
 
   /**
@@ -78,15 +44,9 @@ Page({
       console.log('Not Authenticated yet')
     })
 
-    this.data.orderList.forEach(order => {
-      order.productList.forEach(product => {
-        product.price = util.priceFormate(product.price);
-      })
-    })
+    this.getOrders();
 
-    this.setData({
-      orderList: this.data.orderList
-    })
+    
   },
 
   // 登录
@@ -96,6 +56,39 @@ Page({
         userInfo: event.detail.userInfo
       })
     }
+  },
+
+  getOrders() {
+    wx.showLoading({
+      title: 'Loading...'
+    });
+      
+    db.getOrders().then((result) => {
+      wx.hideLoading();
+
+      const data = result.result;
+
+      if (data) {
+        data.forEach(item => {
+          item.productList.forEach(product => {
+            product.price = util.priceFormate(product.price);
+          })
+        })
+    
+        this.setData({
+          orderList: data
+        })
+      }
+    }).catch((err) => {
+      console.error(err);
+
+      wx.hideLoading();
+
+      wx.showToast({
+        title: 'Failed',
+        icon: 'none'
+      })
+    });
   },
 
   /**

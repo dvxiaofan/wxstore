@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:04 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 10:28:31
+ * @Last Modified time: 2019-08-09 11:03:23
  */
 
 const util = require('./util')
@@ -58,6 +58,23 @@ module.exports = {
             wx.showToast({
                 title: 'Please Login First',
                 icon: 'none'
+            })
+            return {};
+        })
+    },
+
+    // 获取订单数据
+    getOrders() {
+        return util.isAuthenticated()
+        .then(() => {
+            return wx.cloud.callFunction({
+                name: 'getOrders'
+            })
+        })
+        .catch(() => {
+            wx.showToast({
+                icon: 'none',
+                title: 'Please Login First'
             })
             return {};
         })
