@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:04 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 09:53:22
+ * @Last Modified time: 2019-08-09 10:10:33
  */
 
 
@@ -28,6 +28,14 @@ module.exports = {
     addToOrder(data) {
         return wx.cloud.callFunction({
             name: 'addToOrder',
+            data,
+        })
+    },
+
+    // 添加购物车
+    addToCart(data) {
+        return wx.cloud.callFunction({
+            name: 'addToCart',
             data,
         })
     }

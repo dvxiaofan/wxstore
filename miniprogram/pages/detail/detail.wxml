@@ -33,6 +33,6 @@
 </view>
 
 <view class="opr-cnt">
-    <view class="opr-cart">Add to Cart</view>
+    <view class="opr-cart" bind:tap="addToCart">Add to Cart</view>
     <view class="opr-buy" bind:tap="buy">Buy it Now</view>
 </view>
