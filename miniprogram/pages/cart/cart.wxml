@@ -23,7 +23,7 @@
             </view>
             <view class="cart-total-text">Select All</view>
         </view>
-        <view class="cart-edit">{{isCartEdit ? 'Done' : 'Edit'}}</view>
+        <view class="cart-edit"bind:tap="onTapEditCart">{{isCartEdit ? 'Done' : 'Edit'}}</view>
     </view>
 
     <scroll-view class="product-list" 
@@ -42,10 +42,10 @@
             <view class="product-info">
                 <view class="product-name">{{item.name}}</view>
                 <view class="product-price">$ {{item.price}}</view>
-                <view class="product-count-edit" wx:if="{{isCardEdit}}">
-                    <view class="count-minus">-</view>
+                <view class="product-count-edit" wx:if="{{isCartEdit}}">
+                    <view class="count-minus" bind:tap="adjustProductCount" data-type="minus" data-id="{{item.productId}}">-</view>
                     <view class="count-now">{{item.count}}</view>
-                    <view class="count-add">+</view>
+                    <view class="count-add" bind:tap="adjustProductCount" data-type="add" data-id="{{item.productId}}">+</view>
                 </view>
                 <view class="product-count" wx:else>x {{item.count}}</view>
             </view>

@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:55:55 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-10 16:00:36
+ * @Last Modified time: 2019-08-10 16:44:48
  */
 
 const db = require('../../utils/db');
@@ -141,6 +141,42 @@ Page({
     })
 
     return util.priceFormate(checkout);
+  },
+
+  // 编辑
+  onTapEditCart() {
+    this.setData({
+      isCartEdit: !this.data.isCartEdit
+    })
+  },
+
+  // 增加或减少购物车商品数量
+  adjustProductCount(event) {
+    const dataset = event.currentTarget.dataset;
+    const adjustType = dataset.type;
+    const productId = dataset.id;
+    const cartCheckMap = this.data.cartCheckMap;
+    let cartList = this.data.cartList;
+    const productToAdjust = cartList.find(product => product.productId === productId) || {};
+
+    if (adjustType === 'add') {
+      productToAdjust.count ++;
+    } else {
+      if (productToAdjust.count >= 2) {
+        productToAdjust.count --;
+      } else {
+        delete cartCheckMap[productId];
+
+        cartList = cartList.filter(product => product.productId !== productId)
+      }
+    }
+
+    const cartTotal = this.updateTotalPrice(cartList, cartCheckMap);
+
+    this.setData({
+      cartTotal,
+      cartList
+    })
   },
 
   /**
