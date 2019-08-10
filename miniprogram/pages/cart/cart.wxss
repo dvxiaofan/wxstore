@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-09 12:38:40 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 15:09:42
+ * @Last Modified time: 2019-08-10 16:07:06
  */
 
 .cart-empty {
@@ -185,7 +185,7 @@
 
 .cart-checkout-now {
     margin-left: 12rpx;
-    font-size: 34rpx;
+    font-size: 33rpx;
     line-height: 48rpx;
     color: #000000;
 }

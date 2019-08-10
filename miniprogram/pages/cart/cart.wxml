@@ -15,7 +15,10 @@
 <view class="cart-list" wx:else>
     <view class="cart-top">
         <view class="cart-total">
-            <view class="cart-check-wrapper white {{isSelectAllChecked ? 'check' : ''}}">
+            <view class="cart-check-wrapper white {{isSelectAllChecked ? 'check' : ''}}" 
+                bind:tap="onTapCheck" 
+                data-id="selectAll"
+            >
                 <image class="cart-check" src="/images/check.png" wx:if="{{isSelectAllChecked}}" />
             </view>
             <view class="cart-total-text">Select All</view>
@@ -29,8 +32,11 @@
         enable-back-to-top="{{true}}"
     >
         <view class="product-card" wx:for="{{cartList}}" wx:key="productId">
-            <view class="cart-check-wrapper {{chartCheckMap[item.productId] ? 'check' : ''}}">
-                <image class="cart-check" src="images/check.png" wx:if="{{cartCheckMap[item.productId]}}" />
+            <view class="cart-check-wrapper {{cartCheckMap[item.productId] ? 'check' : ''}}"
+                bind:tap="onTapCheck"
+                data-id="{{item.productId}}"
+        >
+                <image class="cart-check" src="/images/check.png" wx:if="{{cartCheckMap[item.productId]}}" />
             </view>
             <image class="product-img" mode="aspectFit" src="{{item.image}}" />
             <view class="product-info">
@@ -48,7 +54,10 @@
     
     <view class="cart-checkout">
         <view class="cart-total">
-            <view class="cart-check-wrapper {{isSelectAllChecked ? 'check' : ''}}">
+            <view class="cart-check-wrapper {{isSelectAllChecked ? 'check' : ''}}"
+                bind:tap="onTapCheck"
+                data-id="selectAll"
+            >
                 <image class="cart-check" src="/images/check.png" wx:if="{{isSelectAllChecked}}" />
             </view>
             <view class="cart-total-text">Select All</view>

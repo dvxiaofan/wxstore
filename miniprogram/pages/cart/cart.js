@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:55:55 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 15:20:40
+ * @Last Modified time: 2019-08-10 16:00:36
  */
 
 const db = require('../../utils/db');
@@ -35,8 +35,6 @@ Page({
       title: 'Loading...'
     });
 
-    const cartCheckMap = this.data.cartCheckMap;
-
     db.getCartList().then((result) => {
       wx.hideLoading();
 
@@ -44,13 +42,13 @@ Page({
 
       if (data.length) {
         // 更新购物车价格
-        let checkout = 0;
-        data.forEach(product => {
-          checkout += product.price * product.count;
-        })
+        // let checkout = 0;
+        // data.forEach(product => {
+        //   checkout += product.price * product.count;
+        // })
 
         this.setData({
-          cartTotal: checkout,
+          cartTotal: util.priceFormate(0),
           cartList: data
         })
       }
@@ -97,6 +95,52 @@ Page({
 
       this.getCartList();
     }
+  },
+
+  // 选择框事件
+  onTapCheck(event) {
+    const checkId = event.currentTarget.dataset.id;
+    const cartCheckMap = this.data.cartCheckMap;
+    let isSelectAllChecked = this.data.isSelectAllChecked;
+    const cartList = this.data.cartList;
+
+    let cartTotal = 0;
+
+    if (checkId === 'selectAll') {
+      isSelectAllChecked = !isSelectAllChecked;
+      cartList.forEach(product => {
+        cartCheckMap[product.productId] = isSelectAllChecked;
+      })
+    } else {
+      cartCheckMap[checkId] = !cartCheckMap[checkId];
+
+      isSelectAllChecked = true;
+
+      cartList.forEach(product => {
+        if (!cartCheckMap[product.productId]) {
+          isSelectAllChecked = false;
+        }
+      })
+    }
+
+    cartTotal = this.updateTotalPrice(cartList, cartCheckMap);
+
+    this.setData({
+      cartTotal,
+      isSelectAllChecked,
+      cartCheckMap
+    })
+
+  },
+
+  // 更新商品总价
+  updateTotalPrice(cartList, cartCheckMap) {
+    let checkout = 0;
+    cartList.forEach(product => {
+      if (cartCheckMap[product.productId]) checkout += product.price * product.count;
+    })
+
+    return util.priceFormate(checkout);
   },
 
   /**
