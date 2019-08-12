@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:55:55 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-12 14:22:48
+ * @Last Modified time: 2019-08-12 14:36:34
  */
 
 const util = require('../../utils/util');
@@ -209,6 +209,57 @@ Page({
         icon: 'none'
       })
     });
+  },
+
+  // 结算
+  onTapCheckout() {
+    if (this.data.cartTotal == 0) {
+      wx.showToast({
+        title: 'Please Select Items',
+        icon: 'none'
+      })
+      return;
+    }
+
+    wx.showLoading({
+      title: 'Loading...'
+    });
+
+    const cartCheckMap = this.data.cartCheckMap;
+    const cartList = this.data.cartList;
+    const productsToCheckout = cartList.filter(product => cartCheckMap[product.productId]);
+    const cartToUpdate = cartList.filter(product => !cartCheckMap[product.productId]);
+
+    db.addToOrder({
+      list: productsToCheckout,
+      isCheckout: true
+    }).then(result => {
+      wx.hideLoading();
+
+      const data = result.result;
+
+      if (data) {
+        wx.showToast({
+          title: 'Succeed',
+          icon: 'none'
+        })
+
+        this.setData({
+          cartList: cartToUpdate
+        })
+
+        this.getCartList();
+      }
+    }).catch(err => {
+      console.error(err);
+      wx.hideLoading();
+
+      wx.showToast({
+        title: 'Failed',
+        icon: 'none'
+      })
+    })
+      
   },
 
   /**
