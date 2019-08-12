@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:52:05 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 10:57:40
+ * @Last Modified time: 2019-08-12 14:22:08
  */
 
 const db = require('../../utils/db');
@@ -40,13 +40,11 @@ Page({
       this.setData({
         userInfo
       })
+
+      this.getOrders();
     }).catch(err => {
       console.log('Not Authenticated yet')
     })
-
-    this.getOrders();
-
-    
   },
 
   // 登录
@@ -55,6 +53,7 @@ Page({
       this.setData({
         userInfo: event.detail.userInfo
       })
+      this.getOrders();
     }
   },
 

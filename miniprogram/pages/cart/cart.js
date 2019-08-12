@@ -2,11 +2,11 @@
  * @Author: zhang 
  * @Date: 2019-08-07 13:55:55 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-10 16:44:48
+ * @Last Modified time: 2019-08-12 14:22:48
  */
 
-const db = require('../../utils/db');
 const util = require('../../utils/util');
+const db = require('../../utils/db');
 
 Page({
 
@@ -26,42 +26,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 获取购物车内商品列表
-    this.getCartList();
-  },
-
-  getCartList() {
-    wx.showLoading({
-      title: 'Loading...'
-    });
-
-    db.getCartList().then((result) => {
-      wx.hideLoading();
-
-      const data = result.result;
-
-      if (data.length) {
-        // 更新购物车价格
-        // let checkout = 0;
-        // data.forEach(product => {
-        //   checkout += product.price * product.count;
-        // })
-
-        this.setData({
-          cartTotal: util.priceFormate(0),
-          cartList: data
-        })
-      }
-    }).catch((err) => {
-      console.error(err);
-
-      wx.hideLoading();
-      
-      wx.showToast({
-        title: 'Failed',
-        icon: 'none'
-      })
-    });
   },
 
   /**
@@ -79,22 +43,52 @@ Page({
       this.setData({
         userInfo
       })
+      
+    this.getCartList();
 
-      this.getCartList();
     }).catch(err => {
       console.log('Not Authenticated yet')
     })
+    
   },
 
   // 登录
   onTapLogin(event) {
-    if (event.detail.userInfo) {
-      this.setData({
-        userInfo: event.detail.userInfo
-      })
+    this.setData({
+      userInfo: event.detail.userInfo
+    })
 
-      this.getCartList();
-    }
+    this.getCartList();
+  },
+
+  // 获取购物车列表
+  getCartList() {
+    wx.showLoading({
+      title: 'Loading...'
+    });
+
+    db.getCartList().then(result => {
+      wx.hideLoading();
+
+      const data = result.result;
+
+      if (data.length) {
+
+        this.setData({
+          cartTotal: util.priceFormate(0),
+          cartList: data
+        })
+      }
+    }).catch((err) => {
+      console.error(err);
+
+      wx.hideLoading();
+      
+      wx.showToast({
+        title: 'Failed',
+        icon: 'none'
+      })
+    });
   },
 
   // 选择框事件
@@ -145,9 +139,13 @@ Page({
 
   // 编辑
   onTapEditCart() {
-    this.setData({
-      isCartEdit: !this.data.isCartEdit
-    })
+    if (!this.data.isCartEdit) {
+      this.setData({
+        isCartEdit: true
+      })
+    } else {
+      this.updateCart();
+    }
   },
 
   // 增加或减少购物车商品数量
@@ -177,6 +175,40 @@ Page({
       cartTotal,
       cartList
     })
+
+    if (!cartList.length) {
+      this.updateCart();
+    }
+  },
+
+  // 更新购物出
+  updateCart() {
+    wx.showLoading({
+      title: 'Loading...'
+    })
+
+    const cartList = this.data.cartList;
+
+    db.updateCart(cartList).then((result) => {
+      wx.hideLoading();
+
+      const data = result.result;
+
+      if (data) {
+        this.setData({
+          isCartEdit: false
+        })
+      }
+    }).catch((err) => {
+      console.error(err);
+
+      wx.hideLoading();
+
+      wx.showToast({
+        title: 'Failed',
+        icon: 'none'
+      })
+    });
   },
 
   /**

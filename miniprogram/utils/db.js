@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:04 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 14:59:56
+ * @Last Modified time: 2019-08-12 13:39:15
  */
 
 const util = require('./util')
@@ -56,8 +56,8 @@ module.exports = {
         })
         .catch(() => {
             wx.showToast({
-                title: 'Please Login First',
-                icon: 'none'
+                icon: 'none',
+                title: 'Please Login First'
             })
             return {};
         })
@@ -90,10 +90,30 @@ module.exports = {
         })
         .catch(() => {
             wx.showToast({
-                title: 'Please Login First',
-                icon: 'none'
+                icon: 'none',
+                title: 'Please Login First'
+            })
+            return {};
+        })
+    },
+
+    // 更新购物车
+    updateCart(list) {
+        return util.isAuthenticated()
+        .then(() => {
+            return wx.cloud.callFunction({
+                name: 'updateCart',
+                data: {
+                    list
+                }
+            })
+        }).catch(() => {
+            wx.showToast({
+                icon: 'none',
+                title: 'Please Login First'
             })
             return {}
-        })
+        });
+        
     },
 }
