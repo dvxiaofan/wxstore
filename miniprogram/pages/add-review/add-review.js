@@ -5,18 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    product: {
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product1.jpg',
-      name: 'product 001',
-      price: '909'
-    }
+    product: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let product = {
+      productId: options.productId,
+      name: options.name,
+      image: options.image,
+      price: options.price
+    };
 
+    this.setData({
+      product
+    })
   },
 
   /**
