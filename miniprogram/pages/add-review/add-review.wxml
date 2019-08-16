@@ -19,4 +19,4 @@
     </textarea>
 </view>
 
-<view class="review-button {{!reviewContent ? 'disable' : ''}}">Submit</view>
+<view class="review-button {{!reviewContent ? 'disable' : ''}}" bind:tap="addReview">Submit</view>
