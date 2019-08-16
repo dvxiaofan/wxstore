@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-15 12:45:08 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-15 12:58:46
+ * @Last Modified time: 2019-08-16 12:52:45
  */
 
 .product-card {
@@ -69,4 +69,8 @@
     border-radius: 10rpx;
     font-size: 30rpx;
     color: #34373d;
+}
+
+.review-button.disable {
+    color: rgba(52, 55, 61, 0.5);
 }

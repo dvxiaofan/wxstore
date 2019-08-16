@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    product: {}
+    product: {},
+    reviewContent: ''
   },
 
   /**
@@ -24,6 +25,13 @@ Page({
     })
   },
 
+  onInput(event) {
+
+    console.log('event: ', event);
+    this.setData({
+      reviewContent: event.detail.value.trim()
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
