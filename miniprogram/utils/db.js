@@ -1,8 +1,8 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:04 
- * @Last Modified by: zhang
- * @Last Modified time: 2019-08-12 13:39:15
+ * @Last Modified by: DevZhang
+ * @Last Modified time: 2019-08-17 18:13:54
  */
 
 const util = require('./util')
@@ -115,5 +115,22 @@ module.exports = {
             return {}
         });
         
+    },
+
+    // 添加评论
+    addReview(data) {
+        return util.isAuthenticated()
+        .then(() => {
+            return wx.cloud.callFunction({
+                name: 'addReview',
+                data,
+            })
+        }).catch(() => {
+            wx.showToast({
+                icon: 'none',
+                title: 'Please Login First'
+            })
+            return {}
+        });
     },
 }
