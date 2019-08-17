@@ -2,11 +2,12 @@
 
 
 <view class="product-card">
-    <image class="product-image" mode="widthFix" src="{{product.image}}"></image>
+    <!-- <image class="product-image" mode="widthFix" src="{{product.image}}"></image>
     <view class="product-info">
         <view class="product-name">{{product.name}}</view>
         <view class="product-price">$ {{product.price}}</view>
-    </view>
+    </view> -->
+    <product product-image="{{product.image}}" product-name="{{product.name}}" product-price="{{product.price}}"></product>
 </view>
 
 <view class="review-content">
