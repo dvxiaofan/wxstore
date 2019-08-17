@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:04 
  * @Last Modified by: DevZhang
- * @Last Modified time: 2019-08-17 18:13:54
+ * @Last Modified time: 2019-08-17 22:05:01
  */
 
 const util = require('./util')
@@ -132,5 +132,12 @@ module.exports = {
             })
             return {}
         });
+    },
+
+    // 获取评论数据
+    getReviews(productId) {
+        return db.collection('review').where({
+            productId
+        }).get();
     },
 }
