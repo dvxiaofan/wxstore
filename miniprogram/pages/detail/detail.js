@@ -1,8 +1,8 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-06 13:20:51 
- * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 14:59:04
+ * @Last Modified by: DevZhang
+ * @Last Modified time: 2019-08-17 21:50:57
  */
 
 
@@ -15,7 +15,9 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    product: {}
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -119,6 +121,14 @@ Page({
         icon: 'none'
       })      
     });
+  },
+
+  // 添加评论
+  onTapReviewEntry() {
+    const product = this.data.product;
+    wx.navigateTo({
+      url: `/pages/review/review?productId=${product._id}&price=${product.price}&name=${product.name}&image=${product.image}`
+    })
   },
 
   /**
