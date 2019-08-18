@@ -2,7 +2,7 @@
  * @Author: DevZhang 
  * @Date: 2019-08-17 17:45:10 
  * @Last Modified by: DevZhang
- * @Last Modified time: 2019-08-17 18:12:27
+ * @Last Modified time: 2019-08-18 22:36:11
  */
 
 
@@ -17,7 +17,8 @@ Page({
   data: {
     product: {},
     reviewContent: '',
-    userInfo: null
+    userInfo: null,
+    previewImages: []
   },
 
   /**
@@ -94,6 +95,20 @@ Page({
       })
     });
 
+  },
+
+  // 添加图片\
+  chooseImage() {
+    wx.chooseImage({
+      count: 3,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+        this.setData({
+          previewImages: res.tempFilePaths
+        })
+      }
+    })
   },
 
   /**

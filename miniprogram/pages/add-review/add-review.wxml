@@ -18,6 +18,7 @@
         maxlength="255"
         bindinput="onInput"
     ></textarea>
+    <image class="opr-upload" src="/images/upload.png" bind:tap="chooseImage"></image>
 </view>
 
 <view 

@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-15 12:45:08 
  * @Last Modified by: DevZhang
- * @Last Modified time: 2019-08-17 21:26:39
+ * @Last Modified time: 2019-08-18 22:38:48
  */
 
 /* 评论 */
@@ -41,4 +41,12 @@
 
 .review-button.disable {
     color: rgba(52, 55, 61, 0.5);
+}
+
+.opr-upload {
+    display: block;
+    margin-top: 29rpx;
+    margin-left: 29rpx;
+    width: 43rpx;
+    height: 43rpx;
 }
