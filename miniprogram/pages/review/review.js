@@ -2,7 +2,7 @@
  * @Author: DevZhang 
  * @Date: 2019-08-17 22:01:30 
  * @Last Modified by: DevZhang
- * @Last Modified time: 2019-08-17 22:09:45
+ * @Last Modified time: 2019-08-19 22:36:43
  */
 
 
@@ -50,7 +50,9 @@ Page({
       if (data.length) {
         this.setData({
           reviewList: data.map(review => {
-            review.createTime = util.formateTime(review.createTime, 'yyyy/MM/dd');
+            console.log('review: ', review);
+            // review.createTime = util.formateTime(review.createTime, 'yyyy/MM/dd');
+            // review.images = review.images ? review.images.split(';') : [];
             return review;
           })
         })
@@ -58,6 +60,17 @@ Page({
     }).catch((err) => {
       console.error(err);
     });
+  },
+
+  // 预览图片
+  previewImage(event) {
+    let target = event.currentTarget;
+    let src = target.dataset.src;
+
+    wx.previewImage({
+      current: src,
+      urls: [src]
+    })
   },
 
   /**

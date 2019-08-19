@@ -1,8 +1,8 @@
 /*
  * @Author: DevZhang 
  * @Date: 2019-08-17 21:21:18 
- * @Last Modified by:   DevZhang 
- * @Last Modified time: 2019-08-17 21:21:18 
+ * @Last Modified by: DevZhang
+ * @Last Modified time: 2019-08-19 22:13:11
  */
 
 .review-list {
@@ -57,4 +57,16 @@
     font-size: 28rpx;
     line-height: 40rpx;
     color: #1D1D26;
+}
+
+.preview-list {
+    display: flex;
+    margin-top: 16rpx;
+}
+
+.preview-item {
+    margin-right: 10rpx;
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 10rpx;
 }

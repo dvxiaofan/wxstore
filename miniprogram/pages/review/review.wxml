@@ -1,5 +1,4 @@
 <product product-image="{{product.image}}" product-name="{{product.name}}" product-price="{{product.price}}"></product>
-
 <view class="review-list">
     <view class="review-title">{{reviewList.length}}reviews</view>
     <view wx:for="{{reviewList}}" wx:key="id" class="review-card">
@@ -10,6 +9,9 @@
                 <view class="review-time">{{item.createTime}}</view>
             </view>
             <view class="review-content">{{item.content}}</view>
+            <view class="preview-list" wx:if="{{item.images.length}}">
+                <image class="preview-item" wx:for="{{item.images}}" wx:for-item="pitem" wx:for-index="pindex" wx:key="*this" src="{{pitem}}" mode="aspectFit" bind:tap="previewImage" data-src="{{pitem}}"></image>
+            </view>
         </view>
     </view>
 </view>
