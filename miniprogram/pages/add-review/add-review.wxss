@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-15 12:45:08 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-19 09:02:19
+ * @Last Modified time: 2019-08-19 12:44:40
  */
 
 /* 评论 */
@@ -49,4 +49,17 @@
     margin-left: 29rpx;
     width: 43rpx;
     height: 43rpx;
+}
+
+.preview-content {
+    display: flex;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+}
+
+.preview-image {
+    margin-right: 10rpx;
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 5rpx;
 }

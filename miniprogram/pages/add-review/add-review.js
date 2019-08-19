@@ -2,7 +2,7 @@
  * @Author: DevZhang 
  * @Date: 2019-08-17 17:45:10 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-19 09:02:13
+ * @Last Modified time: 2019-08-19 12:42:57
  */
 
 
@@ -111,12 +111,14 @@ Page({
     })
   },
 
+  // 输入框事件
   onInput(event) {
     this.setData({
       reviewContent: event.detail.value.trim()
     })
   },
 
+  // 添加评论
   addReview(event) {
     let content = this.data.reviewContent;
     if (!content) return;
@@ -155,6 +157,17 @@ Page({
       })
     })
       
+  },
+
+  // 预览图像
+  previewImage(event) {
+    const target = event.currentTarget;
+    const src = target.dataset.src;
+
+    wx.previewImage({
+      current: src,
+      urls: [src]
+    })
   },
 
   /**
