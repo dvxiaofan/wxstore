@@ -1,13 +1,8 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:14 
-<<<<<<< HEAD
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-16 13:28:32
-=======
- * @Last Modified by: DevZhang
- * @Last Modified time: 2019-08-17 22:07:42
->>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
+ * @Last Modified time: 2019-08-19 09:01:23
  */
 
 module.exports = {

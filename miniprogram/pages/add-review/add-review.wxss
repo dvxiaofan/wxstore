@@ -1,13 +1,8 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-15 12:45:08 
-<<<<<<< HEAD
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-16 12:52:45
-=======
- * @Last Modified by: DevZhang
- * @Last Modified time: 2019-08-18 22:38:48
->>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
+ * @Last Modified time: 2019-08-19 09:02:19
  */
 
 /* 评论 */
@@ -46,8 +41,6 @@
 
 .review-button.disable {
     color: rgba(52, 55, 61, 0.5);
-<<<<<<< HEAD
-=======
 }
 
 .opr-upload {
@@ -56,5 +49,4 @@
     margin-left: 29rpx;
     width: 43rpx;
     height: 43rpx;
->>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
 }

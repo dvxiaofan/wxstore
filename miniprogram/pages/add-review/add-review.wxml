@@ -12,17 +12,6 @@
 
 <view class="review-content">
     <textarea 
-<<<<<<< HEAD
-        class="review-input"
-        placeholder-class="review-placeholder"
-        placeholder="Please leave your public comment..."
-        maxlength="255"
-        bindinput="onInput">
-    </textarea>
-</view>
-
-<view class="review-button {{!reviewContent ? 'disable' : ''}}" bind:tap="addReview">Submit</view>
-=======
         class="review-input" 
         placeholder-class="review-placeholder" 
         placeholder="Please leave your public comment..." 
@@ -36,4 +25,3 @@
     class="review-button {{!reviewContent ? 'disable' : ''}}"
     bind:tap="addReview"
 >Submit</view>
->>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7

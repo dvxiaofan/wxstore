@@ -1,27 +1,14 @@
 /*
-<<<<<<< HEAD
- * @Author: zhang 
- * @Date: 2019-08-16 13:01:36 
- * @Last Modified by: zhang
- * @Last Modified time: 2019-08-16 13:33:24
- */
-
-const util = require('../../utils/util');
-const db = require('../../utils/db');
-
-
-=======
  * @Author: DevZhang 
  * @Date: 2019-08-17 17:45:10 
- * @Last Modified by: DevZhang
- * @Last Modified time: 2019-08-18 22:36:11
+ * @Last Modified by: zhang
+ * @Last Modified time: 2019-08-19 09:02:13
  */
 
 
 const util = require('../../utils/util');
 const db = require('../../utils/db');
 
->>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
 Page({
 
   /**
@@ -30,12 +17,8 @@ Page({
   data: {
     product: {},
     reviewContent: '',
-<<<<<<< HEAD
-    userInfo: null
-=======
     userInfo: null,
     previewImages: []
->>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
   },
 
   /**
@@ -51,11 +34,6 @@ Page({
     }).catch((err) => {
       console.log('Not Authenticated yet');
     });
-<<<<<<< HEAD
-    
-  },
-
-=======
   },
 
   // 评论输入框事件
@@ -66,7 +44,6 @@ Page({
   },
 
   // 设置商品信息
->>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
   setProduct(options) {
     let product = {
       productId: options.productId,
