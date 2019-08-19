@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:04 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-19 09:02:36
+ * @Last Modified time: 2019-08-19 12:55:03
  */
 
 const util = require('./util')
@@ -139,5 +139,13 @@ module.exports = {
         return db.collection('review').where({
             productId
         }).get();
+    },
+
+    // 上传图片
+    uploadImage(imgPath) {
+        return wx.cloud.uploadFile({
+            cloudPath: `review/${util.getId()}`,
+            filePath: imgPath
+        })
     },
 }

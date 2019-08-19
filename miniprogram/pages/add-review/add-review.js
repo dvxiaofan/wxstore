@@ -2,7 +2,7 @@
  * @Author: DevZhang 
  * @Date: 2019-08-17 17:45:10 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-19 12:42:57
+ * @Last Modified time: 2019-08-19 13:00:40
  */
 
 
@@ -127,33 +127,36 @@ Page({
       title: 'Submiting...'
     });
 
-    db.addReview({
-      userName: this.data.userInfo.nickName,
-      avatar: this.data.userInfo.avatarUrl,
-      content,
-      productId: this.data.product.productId
-    }).then(result => {
-      wx.hideLoading();
-      
-      const data = result.result;
-
-      if (data) {
+    this.uploadImage(images => {
+      db.addReview({
+        userName: this.data.userInfo.nickName,
+        avatar: this.data.userInfo.avatarUrl,
+        content,
+        productId: this.data.product.productId,
+        images
+      }).then(result => {
+        wx.hideLoading();
+        
+        const data = result.result;
+  
+        if (data) {
+          wx.showToast({
+            title: 'Succeed'
+          })
+  
+          setTimeout(() => {
+            wx.navigateBack();
+          }, 1500);
+        }
+      }).catch(err => {
+        console.error(err);
+  
+        wx.hideLoading();
+  
         wx.showToast({
-          title: 'Succeed'
+          title: 'Failed',
+          icon: 'none'
         })
-
-        setTimeout(() => {
-          wx.navigateBack();
-        }, 1500);
-      }
-    }).catch(err => {
-      console.error(err);
-
-      wx.hideLoading();
-
-      wx.showToast({
-        title: 'Failed',
-        icon: 'none'
       })
     })
       
@@ -168,6 +171,30 @@ Page({
       current: src,
       urls: [src]
     })
+  },
+
+  // 上传图片
+  uploadImage(callback) {
+    const previewImages = this.data.previewImages;
+    const images = [];
+
+    if (previewImages.length) {
+      let imageCount = previewImages.length;
+      for (let i = 0; i < imageCount; i++) {
+        const element = previewImages[i];
+        db.uploadImage(element).then((result) => {
+          images.push(result.fileID);
+
+          if (i === imageCount - 1) {
+            callback && callback(images)
+          }
+        }).catch((err) => {
+          console.log('err: ', err);
+        });
+      }
+    } else {
+      callback && callback(images);
+    }
   },
 
   /**

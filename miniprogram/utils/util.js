@@ -2,7 +2,7 @@
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:14 
  * @Last Modified by: zhang
- * @Last Modified time: 2019-08-19 09:01:23
+ * @Last Modified time: 2019-08-19 12:57:26
  */
 
 module.exports = {
@@ -62,5 +62,10 @@ module.exports = {
         return reg.replace(/\byyyy|yy|MM|M|dd|d|HH|H|mm|m|ss|s\b/g, $1 => {
             return map[$1];
         });
+    },
+
+    // 获取ID
+    getId() {
+        return Math.floor((1 + Math.random()) * 0x100000000).toString(16).slice(1);
     }
 }
