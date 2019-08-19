@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
  * @Author: zhang 
  * @Date: 2019-08-16 13:01:36 
  * @Last Modified by: zhang
@@ -9,6 +10,18 @@ const util = require('../../utils/util');
 const db = require('../../utils/db');
 
 
+=======
+ * @Author: DevZhang 
+ * @Date: 2019-08-17 17:45:10 
+ * @Last Modified by: DevZhang
+ * @Last Modified time: 2019-08-18 22:36:11
+ */
+
+
+const util = require('../../utils/util');
+const db = require('../../utils/db');
+
+>>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
 Page({
 
   /**
@@ -17,7 +30,12 @@ Page({
   data: {
     product: {},
     reviewContent: '',
+<<<<<<< HEAD
     userInfo: null
+=======
+    userInfo: null,
+    previewImages: []
+>>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
   },
 
   /**
@@ -33,9 +51,22 @@ Page({
     }).catch((err) => {
       console.log('Not Authenticated yet');
     });
+<<<<<<< HEAD
     
   },
 
+=======
+  },
+
+  // 评论输入框事件
+  onInput(event) {
+    this.setData({
+      reviewContent: event.detail.value.trim()
+    })
+  },
+
+  // 设置商品信息
+>>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
   setProduct(options) {
     let product = {
       productId: options.productId,
@@ -46,6 +77,60 @@ Page({
 
     this.setData({
       product
+    })
+  },
+  
+  // 添加评论事件
+  addReview(event) {
+    let content = this.data.reviewContent;
+    if (!content) return;
+
+    wx.showLoading({
+      title: 'Submiting...'
+    })
+
+    db.addReview({
+      userName: this.data.userInfo.nickName,
+      avatar: this.data.userInfo.avatarUrl,
+      content,
+      productId: this.data.product.productId
+    }).then((result) => {
+      wx.hideLoading();
+
+      const data = result.result;
+      if (data) {
+        wx.showToast({
+          title: 'Succeed',
+          icon: 'none'
+        });
+
+        setTimeout(() => {
+          wx.navigateBack();
+        }, 1500);
+      }
+    }).catch((err) => {
+      console.error(err);
+      wx.hideLoading();
+
+      wx.showToast({
+        title: 'Failed',
+        icon: 'none'
+      })
+    });
+
+  },
+
+  // 添加图片\
+  chooseImage() {
+    wx.chooseImage({
+      count: 3,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+        this.setData({
+          previewImages: res.tempFilePaths
+        })
+      }
     })
   },
 

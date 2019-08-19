@@ -1,41 +1,14 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-15 12:45:08 
+<<<<<<< HEAD
  * @Last Modified by: zhang
  * @Last Modified time: 2019-08-16 12:52:45
+=======
+ * @Last Modified by: DevZhang
+ * @Last Modified time: 2019-08-18 22:38:48
+>>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
  */
-
-.product-card {
-    display: flex;
-    align-items: center;
-    padding-left: 26rpx;
-    height: 200rpx;    
-    background: #fff;
-}
-
-.product-image {
-    flex-shrink: 0;
-    width: 160rpx;
-    height: 160rpx;
-}
-
-.product-info {
-    flex: 1;
-    padding: 27rpx;
-    height: 100%;
-    box-sizing: border-box;
-    font-size: 28rpx;
-    line-height: 40rpx;
-}
-
-.product-name {
-    color: rgba(29, 29, 38, 0.8);
-}
-
-.product-price {
-    margin-top: 12rpx;
-    font-weight: bold;
-}
 
 /* 评论 */
 .review-content {
@@ -73,4 +46,15 @@
 
 .review-button.disable {
     color: rgba(52, 55, 61, 0.5);
+<<<<<<< HEAD
+=======
+}
+
+.opr-upload {
+    display: block;
+    margin-top: 29rpx;
+    margin-left: 29rpx;
+    width: 43rpx;
+    height: 43rpx;
+>>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
 }

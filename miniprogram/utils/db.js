@@ -1,8 +1,13 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:04 
+<<<<<<< HEAD
  * @Last Modified by: zhang
  * @Last Modified time: 2019-08-16 13:27:22
+=======
+ * @Last Modified by: DevZhang
+ * @Last Modified time: 2019-08-17 22:05:01
+>>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
  */
 
 const util = require('./util')
@@ -120,6 +125,7 @@ module.exports = {
     // 添加评论
     addReview(data) {
         return util.isAuthenticated()
+<<<<<<< HEAD
             .then(() => {
                 return wx.cloud.callFunction({
                     name: 'addReview',
@@ -133,5 +139,26 @@ module.exports = {
 
                 return {}
             })
+=======
+        .then(() => {
+            return wx.cloud.callFunction({
+                name: 'addReview',
+                data,
+            })
+        }).catch(() => {
+            wx.showToast({
+                icon: 'none',
+                title: 'Please Login First'
+            })
+            return {}
+        });
+    },
+
+    // 获取评论数据
+    getReviews(productId) {
+        return db.collection('review').where({
+            productId
+        }).get();
+>>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
     },
 }

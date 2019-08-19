@@ -42,7 +42,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": 0,
@@ -76,6 +76,14 @@
 					"id": -1,
 					"name": "pages/add-review/add-review",
 					"pathName": "pages/add-review/add-review",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "pages/review/review",
+					"pathName": "pages/review/review",
+					"query": "",
 					"scene": null
 				}
 			]

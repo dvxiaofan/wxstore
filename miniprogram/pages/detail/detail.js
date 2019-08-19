@@ -1,8 +1,8 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-06 13:20:51 
- * @Last Modified by: zhang
- * @Last Modified time: 2019-08-09 14:59:04
+ * @Last Modified by: DevZhang
+ * @Last Modified time: 2019-08-18 22:26:55
  */
 
 
@@ -15,7 +15,9 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    product: {}
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -33,16 +35,16 @@ Page({
     // 查询云数据库内容
     db.getProductDetail(id).then((result) => {
       wx.hideLoading();
-      
+
       const product = result.result;
 
       if (product) {
         product.price = util.priceFormate(product.price);
-        
+
         this.setData({
           product
         })
-      }else {
+      } else {
         setTimeout(() => {
           wx.navigateBack();
         }, 2000);
@@ -57,7 +59,7 @@ Page({
     });
   },
 
-   // 添加购物车
+  // 添加购物车
   addToCart() {
     wx.showLoading({
       title: 'Add to cart...'
@@ -81,7 +83,7 @@ Page({
       wx.showToast({
         title: 'Failed',
         icon: 'none'
-      })      
+      })
     });
   },
 
@@ -90,7 +92,7 @@ Page({
     wx.showLoading({
       title: 'Purchasing...'
     });
-      
+
     const productToBuy = Object.assign({
       count: 1
     }, this.data.product);
@@ -117,8 +119,18 @@ Page({
       wx.showToast({
         title: 'Failed',
         icon: 'none'
-      })      
+      })
     });
+  },
+
+  // 添加评论
+  onTapReviewEntry() {
+    if (this.data.product.reviewCount) {
+      const product = this.data.product;
+      wx.navigateTo({
+        url: `/pages/review/review?productId=${product._id}&price=${product.price}&name=${product.name}&image=${product.image}`
+      })
+    }
   },
 
   /**

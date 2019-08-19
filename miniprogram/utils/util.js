@@ -1,8 +1,13 @@
 /*
  * @Author: zhang 
  * @Date: 2019-08-06 15:33:14 
+<<<<<<< HEAD
  * @Last Modified by: zhang
  * @Last Modified time: 2019-08-16 13:28:32
+=======
+ * @Last Modified by: DevZhang
+ * @Last Modified time: 2019-08-17 22:07:42
+>>>>>>> f803c77bd378a1eefd2bc550d858dc81ab3f81e7
  */
 
 module.exports = {
@@ -40,5 +45,27 @@ module.exports = {
                 }
             })
         })
+    },
+
+    // 时间格式化
+    formateTime(time, reg) {
+        const date = typeof time === 'string' || typeof time === 'number' ? new Date(time) : time;
+        const map = {};
+        map.yyyy = date.getFullYear();
+        map.yy = ('' + map.yyyy).substr(2);
+        map.M = date.getMonth() + 1
+        map.MM = (map.M < 10 ? '0' : '') + map.M;
+        map.d = date.getDate();
+        map.dd = (map.d < 10 ? '0' : '') + map.d;
+        map.H = date.getHours();
+        map.HH = (map.H < 10 ? '0' : '') + map.H;
+        map.m = date.getMinutes();
+        map.mm = (map.m < 10 ? '0' : '') + map.m;
+        map.s = date.getSeconds();
+        map.ss = (map.s < 10 ? '0' : '') + map.s;
+
+        return reg.replace(/\byyyy|yy|MM|M|dd|d|HH|H|mm|m|ss|s\b/g, $1 => {
+            return map[$1];
+        });
     }
 }
